@@ -1,10 +1,10 @@
 import numpy as np
 import copy as c
 import random
-import transformations as t
 
-def board_print(board_vector):
-    print(np.reshape(board_vector, (3, 3)))
+import transformations as t
+from board import *
+
 
 def find_transformation(board_vector):
     tmp_vector = c.copy(board_vector)
@@ -50,33 +50,6 @@ def ai_decision(board_vector):
 
     return random.choice(choose_list)
 
-def place_sign(board, position, sign):
-    # SIGN 0: O
-    #      1: X
-
-    # Kör: 1, 2, 3
-    if sign == 0:
-        for i in range(9):
-            if i == position:
-                board[i] = 1
-
-            elif board[i] in (1, 2):
-                board[i] += 1
-
-            elif board[i] == 3:
-                board[i] = 0
-
-    # X: 1, 2, 3
-    if sign == 1:
-        for i in range(9):
-            if i == position:
-                board[i] = 4
-
-            elif board[i] in (4, 5):
-                board[i] += 1
-
-            elif board[i] == 6:
-                board[i] = 0
 
 def main():
     # b = np.array([2, 64, 0, 8, 0, 0, 4, 32, 16])
@@ -88,6 +61,7 @@ def main():
 
     # Játéktábla létrehozása
     board = np.arange(1, 7, 1)
+    board = np.array([2, 4, 8, 16, 32, 64, 0, 0, 0
     board = np.concatenate( ( board, np.array([0, 0, 0]) ) )
 
 
