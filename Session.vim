@@ -18,8 +18,8 @@ omap <silent> % <Plug>(MatchitOperationForward)
 xmap <silent> % <Plug>(MatchitVisualForward)
 nmap <silent> % <Plug>(MatchitNormalForward)
 nnoremap , ;
-nnoremap -m :nohl
 nnoremap -<Right> :tabm +1
+nnoremap -l :tabm +1
 nnoremap -<Left> :tabm -1
 nnoremap -h :tabm -1
 nnoremap -9 :tabn 9
@@ -36,7 +36,7 @@ nnoremap -wq :wq
 nnoremap -w :w
 nnoremap -qq :q!
 nnoremap -q :q
-nnoremap -l :tabm +1
+nnoremap -m :nohl
 nnoremap -n :NERDTreeToggle
 nmap -c gcc
 xmap -c gc
@@ -44,8 +44,8 @@ nnoremap -sq :mks!:wqa
 nnoremap -s :mks!:wa
 nnoremap 0 ^
 nnoremap ; ,
-nmap Q gq
 xmap Q gq
+nmap Q gq
 omap Q gq
 omap <silent> [% <Plug>(MatchitOperationMultiBackward)
 xmap <silent> [% <Plug>(MatchitVisualMultiBackward)
@@ -122,6 +122,7 @@ legacy set wildignore=*.pyc
 import autoload '/usr/share/vim/vim92/autoload/dist/ft.vim'
 import autoload '/usr/share/vim/vim92/autoload/dist/script.vim'
 import autoload '/usr/share/vim/vim92/autoload/dist/vim9.vim'
+import autoload '/usr/share/vim/vim92/autoload/dist/vimindent.vim'
 const so_save: number = &g:so | const siso_save: number = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 v:this_session = expand("<sfile>:p")
 doautoall SessionLoadPre
@@ -138,11 +139,13 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   wipebuf = bufnr('%')
 endif
 set shortmess+=aoO
-badd +8 evren.py
-badd +26 transformations.py
+badd +7 evren.py
+badd +64 transformations.py
 badd +64 test.py
-badd +0 evren_test.py
-badd +0 board.py
+badd +1 evren_test.py
+badd +1 board.py
+badd +1 Session.vim
+badd +9 .gitignore
 argglobal
 :%argdel
 :$argadd evren.py
@@ -295,181 +298,17 @@ setlocal nowinfixwidth
 setlocal winhighlight=
 setlocal wrap
 setlocal wrapmargin=0
+:15
+sil! normal! zo
+:17
+sil! normal! zo
 {
-  var l: number = 64 - ((31 * winheight(0) + 34) / 69)
+  var l: number = 8 - ((7 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :64
-  normal! 050|
-}
-tabnext
-edit board.py
-argglobal
-balt evren.py
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal backupcopy=
-setlocal balloonexpr=
-setlocal nobinary
-setlocal nobreakindent
-setlocal breakindentopt=
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal nocindent
-legacy setlocal cinkeys=0{,0},0),0],:,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinscopedecls=public,protected,private
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-legacy setlocal comments=b:#,fb:-
-legacy setlocal commentstring=#\ %s
-setlocal complete=.,w,b,u,t,i
-setlocal completefunc=
-setlocal completeopt=
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal cursorlineopt=both
-legacy setlocal define=^\\s*\\(\\(async\\s\\+\\)\\?def\\|class\\)
-setlocal dictionary=
-setlocal nodiff
-setlocal diffanchors=
-setlocal equalprg=
-setlocal errorformat=
-setlocal eventignorewin=
-setlocal expandtab
-if &filetype != 'python'
-legacy setlocal filetype=python
-endif
-setlocal fillchars=
-setlocal findfunc=
-setlocal fixendofline
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=4
-setlocal foldmarker={{{,}}}
-legacy set foldmethod=indent
-legacy setlocal foldmethod=indent
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-legacy setlocal formatoptions=tcq
-setlocal formatprg=
-setlocal grepformat=
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=-1
-legacy setlocal include=^\\s*\\(from\\|import\\)
-legacy setlocal includeexpr=substitute(substitute(substitute(v:fname,b:grandparent_match,b:grandparent_sub,''),b:parent_match,b:parent_sub,''),b:child_match,b:child_sub,'g')
-legacy setlocal indentexpr=python#GetIndent(v:lnum)
-legacy setlocal indentkeys=0{,0},0),0],:,!^F,o,O,e,<:>,=elif,=except
-setlocal noinfercase
-legacy setlocal iskeyword=@,48-57,_,192-255
-legacy setlocal keywordprg=python3\ -m\ pydoc
-setlocal lhistory=10
-set linebreak
-setlocal linebreak
-setlocal nolisp
-setlocal lispoptions=
-setlocal lispwords=
-setlocal nolist
-setlocal listchars=
-setlocal makeencoding=
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-legacy setlocal nrformats=bin,hex
-set number
-setlocal number
-setlocal numberwidth=4
-legacy setlocal omnifunc=python3complete#Complete
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal scrolloff=-1
-setlocal scrolloffpad=-1
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal showbreak=
-setlocal sidescrolloff=-1
-setlocal signcolumn=auto
-setlocal nosmartindent
-setlocal nosmoothscroll
-setlocal softtabstop=4
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal spelloptions=
-setlocal statusline=
-setlocal statuslineopt=
-legacy setlocal suffixesadd=.py
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'python'
-legacy setlocal syntax=python
-endif
-setlocal tabstop=4
-setlocal tagcase=
-setlocal tagfunc=
-setlocal tags=
-setlocal termwinkey=
-setlocal termwinscroll=10000
-setlocal termwinsize=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal thesaurusfunc=
-setlocal undofile
-setlocal undolevels=-123456
-setlocal varsofttabstop=
-setlocal vartabstop=
-setlocal virtualedit=
-setlocal wincolor=
-setlocal nowinfixbuf
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal winhighlight=
-setlocal wrap
-setlocal wrapmargin=0
-:7
-sil! normal! zo
-:13
-sil! normal! zo
-:36
-sil! normal! zo
-:37
-sil! normal! zo
-:38
-sil! normal! zo
-:49
-sil! normal! zo
-:50
-sil! normal! zo
-{
-  var l: number = 60 - ((59 * winheight(0) + 34) / 69)
-  if l < 1 | l = 1 | endif
-  keepjumps exe ":" .. l
-  normal! zt
-  keepjumps :60
-  normal! 08|
+  keepjumps :8
+  normal! 0
 }
 tabnext
 edit evren_test.py
@@ -618,15 +457,191 @@ setlocal wrap
 setlocal wrapmargin=0
 :15
 sil! normal! zo
-:40
+:31
 sil! normal! zo
 {
-  var l: number = 35 - ((34 * winheight(0) + 34) / 69)
+  var l: number = 22 - ((21 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :35
-  normal! 016|
+  keepjumps :22
+  normal! 05|
+}
+tabnext
+edit board.py
+argglobal
+balt evren.py
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal balloonexpr=
+setlocal nobinary
+setlocal nobreakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+legacy setlocal cinkeys=0{,0},0),0],:,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinscopedecls=public,protected,private
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+legacy setlocal comments=b:#,fb:-
+legacy setlocal commentstring=#\ %s
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=
+setlocal completeopt=
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal cursorlineopt=both
+legacy setlocal define=^\\s*\\(\\(async\\s\\+\\)\\?def\\|class\\)
+setlocal dictionary=
+setlocal nodiff
+setlocal diffanchors=
+setlocal equalprg=
+setlocal errorformat=
+setlocal eventignorewin=
+setlocal expandtab
+if &filetype != 'python'
+legacy setlocal filetype=python
+endif
+setlocal fillchars=
+setlocal findfunc=
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=4
+setlocal foldmarker={{{,}}}
+legacy set foldmethod=indent
+legacy setlocal foldmethod=indent
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+legacy setlocal formatoptions=tcq
+setlocal formatprg=
+setlocal grepformat=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+legacy setlocal include=^\\s*\\(from\\|import\\)
+legacy setlocal includeexpr=substitute(substitute(substitute(v:fname,b:grandparent_match,b:grandparent_sub,''),b:parent_match,b:parent_sub,''),b:child_match,b:child_sub,'g')
+legacy setlocal indentexpr=python#GetIndent(v:lnum)
+legacy setlocal indentkeys=0{,0},0),0],:,!^F,o,O,e,<:>,=elif,=except
+setlocal noinfercase
+legacy setlocal iskeyword=@,48-57,_,192-255
+legacy setlocal keywordprg=python3\ -m\ pydoc
+setlocal lhistory=10
+set linebreak
+setlocal linebreak
+setlocal nolisp
+setlocal lispoptions=
+setlocal lispwords=
+setlocal nolist
+setlocal listchars=
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+legacy setlocal nrformats=bin,hex
+set number
+setlocal number
+setlocal numberwidth=4
+legacy setlocal omnifunc=python3complete#Complete
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal scrolloff=-1
+setlocal scrolloffpad=-1
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal showbreak=
+setlocal sidescrolloff=-1
+setlocal signcolumn=auto
+setlocal nosmartindent
+setlocal nosmoothscroll
+setlocal softtabstop=4
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal spelloptions=
+setlocal statusline=
+setlocal statuslineopt=
+legacy setlocal suffixesadd=.py
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'python'
+legacy setlocal syntax=python
+endif
+setlocal tabstop=4
+setlocal tagcase=
+setlocal tagfunc=
+setlocal tags=
+setlocal termwinkey=
+setlocal termwinscroll=10000
+setlocal termwinsize=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal thesaurusfunc=
+setlocal undofile
+setlocal undolevels=-123456
+setlocal varsofttabstop=
+setlocal vartabstop=
+setlocal virtualedit=
+setlocal wincolor=
+setlocal nowinfixbuf
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal winhighlight=
+setlocal wrap
+setlocal wrapmargin=0
+:14
+sil! normal! zo
+:18
+sil! normal! zo
+:28
+sil! normal! zo
+:34
+sil! normal! zo
+:57
+sil! normal! zo
+:58
+sil! normal! zo
+:59
+sil! normal! zo
+:70
+sil! normal! zo
+:71
+sil! normal! zo
+:84
+sil! normal! zo
+:92
+sil! normal! zo
+{
+  var l: number = 23 - ((22 * winheight(0) + 34) / 69)
+  if l < 1 | l = 1 | endif
+  keepjumps exe ":" .. l
+  normal! zt
+  keepjumps :23
+  normal! 025|
 }
 tabnext
 edit transformations.py
@@ -773,15 +788,45 @@ setlocal nowinfixwidth
 setlocal winhighlight=
 setlocal wrap
 setlocal wrapmargin=0
+:58
+sil! normal! zo
+:63
+sil! normal! zo
+:72
+sil! normal! zo
+:95
+sil! normal! zo
+:96
+sil! normal! zo
+:98
+sil! normal! zo
+:101
+sil! normal! zo
+:104
+sil! normal! zo
+:105
+sil! normal! zo
+:106
+sil! normal! zo
+:109
+sil! normal! zo
+:110
+sil! normal! zo
+:113
+sil! normal! zo
+:114
+sil! normal! zo
+:117
+sil! normal! zo
 {
-  var l: number = 26 - ((25 * winheight(0) + 34) / 69)
+  var l: number = 64 - ((16 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :26
-  normal! 0
+  keepjumps :64
+  normal! 010|
 }
-tabnext 3
+tabnext 2
 set stal=1
 if wipebuf != -1 && len(win_findbuf(wipebuf)) == 0
   silent exe 'bwipe ' .. wipebuf

@@ -6,5 +6,4 @@ obj/
 .env
 .vs
 
-*test*
 __pycache__/

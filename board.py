@@ -1,7 +1,28 @@
 import numpy as np
+import copy as c
+from collections import defaultdict
 
-def board_print(board_vector):
-    print(np.reshape(board_vector, (3, 3)))
+
+forbidden_pos = defaultdict(list)
+
+
+
+def board_print(board):
+    print(np.reshape(board, (3, 3)))
+
+def board_print_sign(board):
+    o = {2, 4, 8}
+    x = {16, 32, 64}
+
+    for i in range(len(board)):
+        if board[i] in o:
+            board[i] = 'o'
+        elif board[i] in x:
+            board[i] = 'x'
+        elif board[i] == 0:
+            board[i] = '.'
+
+    print(np.reshape(board, (3, 3)))
 
 def board2str(board, sign):
     s = ""
@@ -56,6 +77,41 @@ def place_sign(board, position, sign):
             elif board[i] == 64:
                 board[i] = 0
                 
-def add_forbiddenpos(forbiddens, sboard, pos):
-    pass
+def add_forbiddenpos(forbidden_pos, sboard, pos):
+    forbidden_pos[sboard].append(pos)
+
+def if_game_end(board):
+    o = np.array([2, 4, 8])
+    x = np.array([16, 32, 64])
+
+    tmp_board = c.copy(board)
+    tmp_matrix = np.reshape(tmp_board, (3, 3))
+
+    # Sorok és oszlopok ellenőrzése
+    for i in range(3):
+        row = tmp_matrix[i:i+1]
+        col = tmp_matrix[:, i:i+1]
+
+        # print(row)
+        # print()
+        # print(col)
+        # print()
+
+        if np.isin(row, o).all() or np.isin(col, o).all():
+            return 0
+        elif np.isin(row, x).all() or np.isin(col, x).all():
+            return 1
+
+    # Átlók ellenőrzése
+    diag_main = np.diag(tmp_matrix)
+    diag_sec = np.fliplr(tmp_matrix).diagonal()
+
+    # print(diag_main)
+    # print(diag_sec)
+    # print()
+
+    if np.isin(diag_main, o).all() or np.isin(diag_sec, o).all():
+        return 0
+    elif np.isin(diag_main, x).all() or np.isin(diag_sec, x).all():
+        return 1
 
