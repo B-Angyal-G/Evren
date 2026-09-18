@@ -44,8 +44,8 @@ nnoremap -sq :mks!:wqa
 nnoremap -s :mks!:wa
 nnoremap 0 ^
 nnoremap ; ,
-xmap Q gq
 nmap Q gq
+xmap Q gq
 omap Q gq
 omap <silent> [% <Plug>(MatchitOperationMultiBackward)
 xmap <silent> [% <Plug>(MatchitVisualMultiBackward)
@@ -119,6 +119,7 @@ set ttimeoutlen=100
 set undofile
 legacy set viminfo='20,\"50
 legacy set wildignore=*.pyc
+set window=70
 import autoload '/usr/share/vim/vim92/autoload/dist/ft.vim'
 import autoload '/usr/share/vim/vim92/autoload/dist/script.vim'
 import autoload '/usr/share/vim/vim92/autoload/dist/vim9.vim'
@@ -139,8 +140,8 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   wipebuf = bufnr('%')
 endif
 set shortmess+=aoO
-badd +7 evren.py
-badd +64 transformations.py
+badd +1 evren.py
+badd +1 transformations.py
 badd +64 test.py
 badd +1 evren_test.py
 badd +1 board.py
@@ -298,17 +299,37 @@ setlocal nowinfixwidth
 setlocal winhighlight=
 setlocal wrap
 setlocal wrapmargin=0
-:15
+:14
 sil! normal! zo
-:17
+:27
+sil! normal! zo
+:28
+sil! normal! zo
+:32
+sil! normal! zo
+:41
+sil! normal! zo
+:50
+sil! normal! zo
+:55
+sil! normal! zo
+:66
+sil! normal! zo
+:75
+sil! normal! zo
+:96
+sil! normal! zo
+:128
+sil! normal! zo
+:149
 sil! normal! zo
 {
-  var l: number = 8 - ((7 * winheight(0) + 34) / 69)
+  var l: number = 86 - ((10 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :8
-  normal! 0
+  keepjumps :86
+  normal! 065|
 }
 tabnext
 edit evren_test.py
@@ -455,17 +476,39 @@ setlocal nowinfixwidth
 setlocal winhighlight=
 setlocal wrap
 setlocal wrapmargin=0
-:15
+:11
 sil! normal! zo
-:31
+:24
+sil! normal! zo
+:25
+sil! normal! zo
+:29
+sil! normal! zo
+:37
+sil! normal! zo
+:44
+sil! normal! zo
+:58
+sil! normal! zo
+:100
+sil! normal! zo
+:105
+sil! normal! zo
+:113
+sil! normal! zo
+:136
+sil! normal! zo
+:137
+sil! normal! zo
+:195
 sil! normal! zo
 {
-  var l: number = 22 - ((21 * winheight(0) + 34) / 69)
+  var l: number = 212 - ((70 * winheight(0) + 35) / 71)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :22
-  normal! 05|
+  keepjumps :212
+  normal! 06|
 }
 tabnext
 edit board.py
@@ -613,35 +656,39 @@ setlocal nowinfixwidth
 setlocal winhighlight=
 setlocal wrap
 setlocal wrapmargin=0
-:14
+:17
 sil! normal! zo
-:18
+:22
 sil! normal! zo
-:28
+:35
 sil! normal! zo
-:34
+:37
 sil! normal! zo
-:57
+:46
 sil! normal! zo
-:58
-sil! normal! zo
-:59
-sil! normal! zo
-:70
+:49
 sil! normal! zo
 :71
 sil! normal! zo
-:84
+:72
 sil! normal! zo
-:92
+:73
+sil! normal! zo
+:82
+sil! normal! zo
+:83
+sil! normal! zo
+:93
+sil! normal! zo
+:101
 sil! normal! zo
 {
-  var l: number = 23 - ((22 * winheight(0) + 34) / 69)
+  var l: number = 118 - ((70 * winheight(0) + 35) / 71)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :23
-  normal! 025|
+  keepjumps :118
+  normal! 05|
 }
 tabnext
 edit transformations.py
@@ -788,21 +835,27 @@ setlocal nowinfixwidth
 setlocal winhighlight=
 setlocal wrap
 setlocal wrapmargin=0
-:58
+:64
 sil! normal! zo
-:63
+:69
 sil! normal! zo
-:72
+:78
+sil! normal! zo
+:91
+sil! normal! zo
+:92
+sil! normal! zo
+:94
 sil! normal! zo
 :95
 sil! normal! zo
-:96
+:97
 sil! normal! zo
-:98
+:100
 sil! normal! zo
 :101
 sil! normal! zo
-:104
+:102
 sil! normal! zo
 :105
 sil! normal! zo
@@ -816,17 +869,17 @@ sil! normal! zo
 sil! normal! zo
 :114
 sil! normal! zo
-:117
+:120
 sil! normal! zo
 {
-  var l: number = 64 - ((16 * winheight(0) + 34) / 69)
+  var l: number = 123 - ((70 * winheight(0) + 35) / 71)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :64
-  normal! 010|
+  keepjumps :123
+  normal! 053|
 }
-tabnext 2
+tabnext 1
 set stal=1
 if wipebuf != -1 && len(win_findbuf(wipebuf)) == 0
   silent exe 'bwipe ' .. wipebuf
@@ -839,6 +892,7 @@ if filereadable(sx)
   exe "source " .. fnameescape(sx)
 endif
 &g:so = so_save | &g:siso = siso_save
+nohlsearch
 doautoall SessionLoadPost
 unlet g:SessionLoad
 # vim: set ft=vim :
