@@ -44,8 +44,8 @@ nnoremap -sq :mks!:wqa
 nnoremap -s :mks!:wa
 nnoremap 0 ^
 nnoremap ; ,
-nmap Q gq
 xmap Q gq
+nmap Q gq
 omap Q gq
 omap <silent> [% <Plug>(MatchitOperationMultiBackward)
 xmap <silent> [% <Plug>(MatchitVisualMultiBackward)
@@ -324,12 +324,12 @@ sil! normal! zo
 :149
 sil! normal! zo
 {
-  var l: number = 86 - ((10 * winheight(0) + 34) / 69)
+  var l: number = 145 - ((69 * winheight(0) + 35) / 71)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :86
-  normal! 065|
+  keepjumps :145
+  normal! 0
 }
 tabnext
 edit evren_test.py
@@ -488,27 +488,33 @@ sil! normal! zo
 sil! normal! zo
 :44
 sil! normal! zo
-:58
+:51
 sil! normal! zo
-:100
+:54
 sil! normal! zo
-:105
+:60
 sil! normal! zo
-:113
+:70
 sil! normal! zo
-:136
+:130
 sil! normal! zo
-:137
+:135
 sil! normal! zo
-:195
+:143
+sil! normal! zo
+:166
+sil! normal! zo
+:167
+sil! normal! zo
+:225
 sil! normal! zo
 {
-  var l: number = 212 - ((70 * winheight(0) + 35) / 71)
+  var l: number = 102 - ((67 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :212
-  normal! 06|
+  keepjumps :102
+  normal! 0
 }
 tabnext
 edit board.py
@@ -682,13 +688,29 @@ sil! normal! zo
 sil! normal! zo
 :101
 sil! normal! zo
+:123
+sil! normal! zo
+:133
+sil! normal! zo
+:134
+sil! normal! zo
+:137
+sil! normal! zo
+:144
+sil! normal! zo
+:161
+sil! normal! zo
+:162
+sil! normal! zo
+:186
+sil! normal! zo
 {
-  var l: number = 118 - ((70 * winheight(0) + 35) / 71)
+  var l: number = 174 - ((52 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :118
-  normal! 05|
+  keepjumps :174
+  normal! 051|
 }
 tabnext
 edit transformations.py
@@ -847,8 +869,6 @@ sil! normal! zo
 sil! normal! zo
 :94
 sil! normal! zo
-:95
-sil! normal! zo
 :97
 sil! normal! zo
 :100
@@ -879,7 +899,7 @@ sil! normal! zo
   keepjumps :123
   normal! 053|
 }
-tabnext 1
+tabnext 3
 set stal=1
 if wipebuf != -1 && len(win_findbuf(wipebuf)) == 0
   silent exe 'bwipe ' .. wipebuf

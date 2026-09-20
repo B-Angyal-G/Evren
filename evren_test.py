@@ -48,6 +48,36 @@ def ai_decision(board, forbidden_pos, sign):
 
 
 def main():
+    board = np.array([64, 8, 1, 16, 1, 4, 1, 32, 2])
+    
+    for _  in range(1000):
+        np.random.shuffle(board)
+
+        wo = if_force_win(board, 0)
+        wx = if_force_win(board, 1)
+
+        if wo != -1:
+            tmp_board = c.copy(board)
+            place_sign(board, wo, 0)
+            if if_game_end(board) == -1:
+                print('Warning!')
+                board_print(tmp_board)
+                print(wo)
+                board_print(board)
+                input()
+
+        if wx != -1:
+            tmp_board = c.copy(board)
+            place_sign(board, wx, 1)
+            if if_game_end(board) == -1:
+                print('Warning!')
+                board_print(tmp_board)
+                print(wx)
+                board_print(board)
+                input()
+
+    return 0
+
     # sboard='0020326448160'
     # board = str2board(sboard)[0]
     #
