@@ -8,6 +8,7 @@ def clrscr():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
+# Tábla kiíratása számokkal és jelekkel
 def board_print(board):
     print(np.reshape(board, (3, 3)))
     print()
@@ -90,9 +91,6 @@ def place_sign(board, position, sign):
 
 # Nyert-e valaki? Visszatérés: 0 -> o, 1 -> x, egyébként -1
 def if_game_end(board):
-    o = np.array([2, 4, 8])
-    x = np.array([16, 32, 64])
-
     tmp_board = c.copy(board)
     tmp_matrix = np.reshape(tmp_board, (3, 3))
 
@@ -101,40 +99,38 @@ def if_game_end(board):
         row = tmp_matrix[i:i + 1]
         col = tmp_matrix[:, i:i + 1]
 
-        if np.isin(row, o).all() or np.isin(col, o).all():
+        if np.sum(row) == 14 or np.sum(col) == 14:
             return 0
-        elif np.isin(row, x).all() or np.isin(col, x).all():
+        elif np.sum(row) == 112 or np.sum(col) == 112:
             return 1
 
     # Átlók ellenőrzése
     diag_main = np.diag(tmp_matrix)
     diag_sec = np.fliplr(tmp_matrix).diagonal()
 
-    if np.isin(diag_main, o).all() or np.isin(diag_sec, o).all():
+    if np.sum(diag_main) == 14 or np.sum(diag_sec) == 14:
         return 0
-    elif np.isin(diag_main, x).all() or np.isin(diag_sec, x).all():
+    elif np.sum(diag_main) == 112 or np.sum(diag_sec) == 112:
         return 1
 
     return -1
 
 
-# Van-e nyerő lépés
+# Van-e nyerő lépés egy adott jelnek: igen -> pos, egyébként -1
 def if_force_win(board, signal):
+    tmp_board = np.zeros(9, dtype='int32')
     if signal == 0:
-        own = np.array([2, 4, 8])
-        enemy = np.array([16, 32, 64])
-    elif signal == 1:
-        enemy = np.array([2, 4, 8])
-        own = np.array([16, 32, 64])
-
-
-    tmp_board = np.ones(9, dtype='int32')
-    for i in range(9):
-        if signal == 0:
-            if board[i] != 8:
+        limit_min = 6
+        limit_max = 12
+        for i in range(9):
+            if board[i] != 8 and board[i] > 1:
                 tmp_board[i] = board[i]
-        elif signal == 1:
-            if board[i] != 64:
+
+    elif signal == 1:
+        limit_min = 48
+        limit_max = 96
+        for i in range(9):
+            if board[i] != 64 and board[i] > 1:
                 tmp_board[i] = board[i]
 
     tmp_matrix = np.reshape(tmp_board, (3, 3))
@@ -144,62 +140,46 @@ def if_force_win(board, signal):
         row = tmp_matrix[i:i + 1]
         col = tmp_matrix[:, i:i + 1]
 
-        # board_print(board)
-        # print(row)
-        # print('row[0]:', row[0])
-        # print(row[0][2])
+        sum_row = np.sum(row)
+        sum_col = np.sum(col)
 
-        # print(col)
-        # print(col[0])
+        if sum_row >= limit_min and sum_row <= limit_max:
+            for k in range(3):
+                if row[0][k] == 0 or row[0][k] == 1:
+                    # print(tmp_matrix)
+                    # print('Win row:', signal, i, k)
+                    # print()
+                    return 3 * i + k
 
-        row_signal = 0
-        col_signal = 0
-        win_pos_row = -1
-        win_pos_col = -1
-
-        for k in range(3):
-            if np.isin(row[0][k], own).all():
-                row_signal += 1
-            elif not np.isin(row[0][k], enemy).all():
-                win_pos_row = k
-            if np.isin(col[k][0], own).all():
-                col_signal += 1
-            elif not np.isin(col[k][0], enemy).all():
-                win_pos_col = k
-
-        if row_signal == 2 and win_pos_row != -1:
-            print('ROW', i, win_pos_row)
-            return win_pos_row + 3 * i
-        if col_signal == 2 and win_pos_col != -1:
-            print('COL', i, win_pos_col, col_signal)
-            return 3 * win_pos_col + i
-
+        if sum_col >= limit_min and sum_col <= limit_max:
+            for k in range(3):
+                if col[k][0] == 0 or col[k][0] == 1:
+                    # print(tmp_matrix)
+                    # print('Win col:', signal, i, k)
+                    # print()
+                    return 3 * k + i
 
     # Átlók ellenőrzése
-    diag_main_signal = 0
-    diag_sec_signal = 0
-    win_pos_diag_main = -1
-    win_pos_diag_sec = -1
+    diag_main = np.diag(tmp_matrix)
+    diag_sec = np.fliplr(tmp_matrix).diagonal()
 
-    for k in range(3):
-        # Főátló
-        if np.isin(tmp_matrix[k, k], own).all():
-            diag_main_signal += 1
-        elif not np.isin(tmp_matrix[k, k], enemy).all():
-            win_pos_diag_main = k
+    sum_diag_main = np.sum(diag_main)
+    sum_diag_sec = np.sum(diag_sec)
 
-        # Mellékátló
-        if np.isin(tmp_matrix[k, 2 - k], own).all():
-            diag_main_signal += 1
-        elif not np.isin(tmp_matrix[k, 2 - k], enemy).all():
-            win_pos_diag_main = k
+    if sum_diag_main >= limit_min and sum_diag_main <= limit_max:
+        for k in range(3):
+            if diag_main[k] == 0 or diag_main[k] == 1:
+                # print(tmp_matrix)
+                # print('Win diag main:', signal, k)
+                # print()
+                return 4 * k
 
-
-    if diag_main_signal == 2 and win_pos_diag_main != -1:
-        print('DIAG MAIN', win_pos_diag_main)
-        return 4 * win_pos_diag_main
-    if diag_sec_signal == 2 and win_pos_diag_sec != -1:
-        print('DIAG SEC', win_pos_diag_sec)
-        return 2 * win_pos_diag_sec + 2
+    if sum_diag_sec >= limit_min and sum_diag_sec <= limit_max:
+        for k in range(3):
+            if diag_sec[k] == 0 or diag_sec[k] == 1:
+                # print(tmp_matrix)
+                # print('Win diag sec:', signal, k)
+                # print()
+                return 2 * k + 2
 
     return -1

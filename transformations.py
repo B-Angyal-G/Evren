@@ -57,6 +57,8 @@ transformations[7] = np.dot(rot, transformations[6])
 
 
 
+
+
 # <--- Függvények --->
 
 # Egységes álláshoz szükséges transzformáció megkeresése

@@ -44,8 +44,8 @@ nnoremap -sq :mks!:wqa
 nnoremap -s :mks!:wa
 nnoremap 0 ^
 nnoremap ; ,
-xmap Q gq
 nmap Q gq
+xmap Q gq
 omap Q gq
 omap <silent> [% <Plug>(MatchitOperationMultiBackward)
 xmap <silent> [% <Plug>(MatchitVisualMultiBackward)
@@ -119,7 +119,6 @@ set ttimeoutlen=100
 set undofile
 legacy set viminfo='20,\"50
 legacy set wildignore=*.pyc
-set window=70
 import autoload '/usr/share/vim/vim92/autoload/dist/ft.vim'
 import autoload '/usr/share/vim/vim92/autoload/dist/script.vim'
 import autoload '/usr/share/vim/vim92/autoload/dist/vim9.vim'
@@ -144,7 +143,7 @@ badd +1 evren.py
 badd +1 transformations.py
 badd +64 test.py
 badd +1 evren_test.py
-badd +1 board.py
+badd +185 board.py
 badd +1 Session.vim
 badd +9 .gitignore
 argglobal
@@ -307,28 +306,32 @@ sil! normal! zo
 sil! normal! zo
 :32
 sil! normal! zo
-:41
+:42
 sil! normal! zo
-:50
+:56
 sil! normal! zo
-:55
+:61
 sil! normal! zo
-:66
+:73
 sil! normal! zo
-:75
+:97
 sil! normal! zo
-:96
+:138
 sil! normal! zo
-:128
+:174
 sil! normal! zo
-:149
+:195
+sil! normal! zo
+:196
+sil! normal! zo
+:205
 sil! normal! zo
 {
-  var l: number = 145 - ((69 * winheight(0) + 35) / 71)
+  var l: number = 67 - ((49 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :145
+  keepjumps :67
   normal! 0
 }
 tabnext
@@ -509,17 +512,16 @@ sil! normal! zo
 :225
 sil! normal! zo
 {
-  var l: number = 102 - ((67 * winheight(0) + 34) / 69)
+  var l: number = 51 - ((16 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :102
-  normal! 0
+  keepjumps :51
+  normal! 05|
 }
 tabnext
 edit board.py
 argglobal
-balt evren.py
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -586,7 +588,7 @@ setlocal imsearch=-1
 legacy setlocal include=^\\s*\\(from\\|import\\)
 legacy setlocal includeexpr=substitute(substitute(substitute(v:fname,b:grandparent_match,b:grandparent_sub,''),b:parent_match,b:parent_sub,''),b:child_match,b:child_sub,'g')
 legacy setlocal indentexpr=python#GetIndent(v:lnum)
-legacy setlocal indentkeys=0{,0},0),0],:,!^F,o,O,e,<:>,=elif,=except
+legacy setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e,<:>,=elif,=except
 setlocal noinfercase
 legacy setlocal iskeyword=@,48-57,_,192-255
 legacy setlocal keywordprg=python3\ -m\ pydoc
@@ -599,7 +601,7 @@ setlocal lispwords=
 setlocal nolist
 setlocal listchars=
 setlocal makeencoding=
-setlocal makeprg=
+legacy setlocal makeprg=make
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
 setlocal modifiable
@@ -662,55 +664,71 @@ setlocal nowinfixwidth
 setlocal winhighlight=
 setlocal wrap
 setlocal wrapmargin=0
-:17
+:18
 sil! normal! zo
-:22
+:23
 sil! normal! zo
-:35
+:36
 sil! normal! zo
-:37
+:38
 sil! normal! zo
-:46
+:47
 sil! normal! zo
-:49
-sil! normal! zo
-:71
+:50
 sil! normal! zo
 :72
 sil! normal! zo
 :73
 sil! normal! zo
-:82
+:74
 sil! normal! zo
 :83
 sil! normal! zo
-:93
+:84
 sil! normal! zo
-:101
+:94
+sil! normal! zo
+:99
+sil! normal! zo
+:121
 sil! normal! zo
 :123
 sil! normal! zo
+:126
+sil! normal! zo
+:130
+sil! normal! zo
 :133
 sil! normal! zo
-:134
+:140
 sil! normal! zo
-:137
+:147
 sil! normal! zo
-:144
+:148
 sil! normal! zo
-:161
+:152
 sil! normal! zo
-:162
+:155
 sil! normal! zo
-:186
+:156
+sil! normal! zo
+:160
+sil! normal! zo
+:170
+sil! normal! zo
+:171
+sil! normal! zo
+:178
+sil! normal! zo
+:179
 sil! normal! zo
 {
-  var l: number = 174 - ((52 * winheight(0) + 34) / 69)
+  var l: number = 185 - ((68 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :174
-  normal! 051|
+  keepjumps :185
+  normal! 013|
 }
 tabnext
 edit transformations.py
@@ -857,49 +875,49 @@ setlocal nowinfixwidth
 setlocal winhighlight=
 setlocal wrap
 setlocal wrapmargin=0
-:64
+:66
 sil! normal! zo
-:69
+:71
 sil! normal! zo
-:78
+:80
 sil! normal! zo
-:91
-sil! normal! zo
-:92
+:93
 sil! normal! zo
 :94
 sil! normal! zo
-:97
+:96
 sil! normal! zo
-:100
-sil! normal! zo
-:101
+:99
 sil! normal! zo
 :102
 sil! normal! zo
-:105
+:103
 sil! normal! zo
-:106
+:104
 sil! normal! zo
-:109
+:107
 sil! normal! zo
-:110
+:108
 sil! normal! zo
-:113
+:111
 sil! normal! zo
-:114
+:112
 sil! normal! zo
-:120
+:115
+sil! normal! zo
+:116
+sil! normal! zo
+:122
 sil! normal! zo
 {
-  var l: number = 123 - ((70 * winheight(0) + 35) / 71)
+  var l: number = 125 - ((68 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :123
-  normal! 053|
+  keepjumps :125
+  normal! 0
 }
-tabnext 3
+tabnext 1
 set stal=1
 if wipebuf != -1 && len(win_findbuf(wipebuf)) == 0
   silent exe 'bwipe ' .. wipebuf
