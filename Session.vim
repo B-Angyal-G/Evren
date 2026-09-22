@@ -44,8 +44,8 @@ nnoremap -sq :mks!:wqa
 nnoremap -s :mks!:wa
 nnoremap 0 ^
 nnoremap ; ,
-nmap Q gq
 xmap Q gq
+nmap Q gq
 omap Q gq
 omap <silent> [% <Plug>(MatchitOperationMultiBackward)
 xmap <silent> [% <Plug>(MatchitVisualMultiBackward)
@@ -327,12 +327,12 @@ sil! normal! zo
 :205
 sil! normal! zo
 {
-  var l: number = 67 - ((49 * winheight(0) + 34) / 69)
+  var l: number = 72 - ((6 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :67
-  normal! 0
+  keepjumps :72
+  normal! 05|
 }
 tabnext
 edit evren_test.py
@@ -512,12 +512,12 @@ sil! normal! zo
 :225
 sil! normal! zo
 {
-  var l: number = 51 - ((16 * winheight(0) + 34) / 69)
+  var l: number = 52 - ((17 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :51
-  normal! 05|
+  keepjumps :52
+  normal! 04|
 }
 tabnext
 edit board.py
@@ -723,12 +723,12 @@ sil! normal! zo
 :179
 sil! normal! zo
 {
-  var l: number = 185 - ((68 * winheight(0) + 34) / 69)
+  var l: number = 88 - ((51 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :185
-  normal! 013|
+  keepjumps :88
+  normal! 0
 }
 tabnext
 edit transformations.py
@@ -910,12 +910,12 @@ sil! normal! zo
 :122
 sil! normal! zo
 {
-  var l: number = 125 - ((68 * winheight(0) + 34) / 69)
+  var l: number = 55 - ((46 * winheight(0) + 34) / 69)
   if l < 1 | l = 1 | endif
   keepjumps exe ":" .. l
   normal! zt
-  keepjumps :125
-  normal! 0
+  keepjumps :55
+  normal! 018|
 }
 tabnext 1
 set stal=1

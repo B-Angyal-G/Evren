@@ -191,7 +191,7 @@ def main():
 
 
     # Megtanult tiltott lépések file-ba írása
-    with open('data.txt', 'w') as file:
+    with open('./data/forbidden_positions.txt', 'w') as file:
         for p in forbidden_pos:
             file.write(str(p))
             file.write(str('\n'))
@@ -200,7 +200,7 @@ def main():
             file.write(str('\n'))
 
     # Statisztikai adatok file-ba írása
-    with open('statistic.txt', 'w') as file:
+    with open('./data/statistic.txt', 'w') as file:
         # Fejléc
         file.write(str('#'))
         file.write(str('Interval\t'))   # Adatösszegzéshez lépésköz
@@ -233,7 +233,7 @@ def main():
     # Adatok ábrázolása
     x_axis = [STEP_INTERVAL * i for i in range(len(abs_time))]
 
-    plt.plot(x_axis, possibility_ratio)
+    plt.plot(x_axis[1:], possibility_ratio[1:])
     plt.show()
 
 
